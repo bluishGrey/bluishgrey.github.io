@@ -1,0 +1,461 @@
+/* ===== 공통 뼈대 ===== */
+body {
+  font-family: sans-serif;
+  transition: background 0.6s ease;
+  margin: 0;
+  min-height: 100vh;
+}
+.container {
+  max-width: 1200px;
+  margin: 25px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+.header-block {
+  margin-top: 70px;
+}
+h1 {
+  font-size: 40px;
+  margin-bottom: 0;
+}
+.gradient-text {
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: background-position 0.6s ease;
+  cursor: default;
+}
+.gradient-text:hover {
+  background-position: 100% 0;
+}
+
+/* 명언: h1의 ">" 바로 아래 오도록, 같은 만큼 들여씀 (& nbsp; 두 개 폭에 맞춤) */
+#quote-line {
+  font-size: 13px;
+  opacity: 0.85;
+  margin: 2px 0 24px 34px;
+  display: inline-block;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  cursor: default;
+}
+#quote-line:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.link-row {
+  display: flex;
+  gap: 12px;
+  margin: 30px 0px 8px 0px;
+}
+.link-card {
+  border-radius: 10px;
+  padding: 10px;
+  flex: 1;
+}
+.link-card h2 {
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+.link-card a {
+  display: block;
+  margin-bottom: 6px;
+  text-decoration: none;
+}
+.link-card a:hover {
+  text-decoration: underline;
+}
+.link-card a:active {
+  font-weight: bold;
+}
+.progress-card h3 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 12px;
+  font-weight: 100;
+  text-align: right;
+}
+.week-bar, .stage-bar {
+  margin-bottom: 0px;
+}
+.week-bar {
+  display: flex;
+  margin-bottom: 2px;
+}
+.week-cell {
+  flex: 1;
+  text-align: left;
+  font-size: 8px;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+.week-cell.current {
+  font-weight: bold;
+}
+.stage-bar {
+  display: flex;
+}
+.stage-cell {
+  text-align: left;
+  padding: 0px 0;
+  font-size: 10px;
+  font-weight: 100;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+.stage-cell.current {
+  font-weight: 800;
+}
+#journal-preview {
+  border-radius: 10px;
+  padding: 16px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+.journal-card {
+  border-radius: 10px;
+  padding: 10px;
+  margin: 40px 0 0 0;
+}
+.journal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+  padding: 0px;
+  margin-bottom: 8px;
+}
+.journal-header h2 {
+  margin: 0;
+  font-weight: 600;
+}
+.journal-card a {
+  margin-top: 10px;
+  text-decoration: none;
+}
+.journal-card a:hover {
+  text-decoration: underline;
+}
+.journal-card a:active {
+  font-weight: bold;
+}
+
+/* ===== 시계 섹션 ===== */
+.clock-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 40px 0 40px 0;
+}
+
+/* 워치페이스: 다이얼(반지름 95)보다 살짝만 더 넓은 지름의 배경 원 */
+.watch-bezel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.watch-face-bg {
+  fill: var(--clock-face, rgba(255,255,255,0.12));
+}
+
+.clock-ring-outer, .clock-ring-inner {
+  stroke: var(--clock-border, rgba(255,255,255,0.3));
+  stroke-width: 1;
+}
+.hand {
+  stroke: var(--clock-hand, currentColor);
+  stroke-linecap: round;
+}
+.hand-hour { stroke-width: 4; }
+.hand-min { stroke-width: 3; }
+.hand-sec { stroke: var(--clock-accent, #e0a458); stroke-width: 1.5; }
+.hand-center { fill: var(--clock-accent, #e0a458); }
+.dial-grip {
+  fill: var(--clock-accent, #e0a458);
+}
+
+/* 디지털 시각 카드: 아날로그 시계와 별개의 카드 */
+.clock-readout-card {
+  border-radius: 10px;
+  padding: 4px 14px;
+  text-align: center;
+}
+.clock-readout-card p {
+  margin: 2px 0;
+}
+#dial-time {
+  font-size: 18px;
+  font-weight: 500;
+}
+#dial-label {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* ===== 디버그 패널 ===== */
+#debug-panel {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 999;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 200px;
+}
+#debug-panel button {
+  font-size: 10px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(0,0,0,0.3);
+  color: white;
+  cursor: pointer;
+}
+
+/* ===== 달 ===== */
+#moon {
+  position: fixed;
+  top: 60px;
+  right: 100px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  z-index: 0;
+  transition: opacity 0.8s ease, filter 0.8s ease, box-shadow 0.8s ease,
+              top 0.4s ease, right 0.4s ease, width 0.4s ease, height 0.4s ease;
+}
+@media (max-width: 900px) {
+  #moon { top: 36px; right: 40px; width: 46px; height: 46px; }
+}
+@media (max-width: 560px) {
+  #moon { top: 12px; right: 12px; width: 32px; height: 32px; }
+}
+
+/* ===== 별 ===== */
+#stars {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--star-color, #ffffff);
+  opacity: 0;
+  transition: opacity 1.6s ease;
+}
+.star.on {
+  opacity: 0.85;
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { filter: brightness(0.65); }
+  50% { filter: brightness(1.4); }
+}
+
+/* ============================================================
+   시간대별 테마 (8단계)
+   ============================================================ */
+
+/* ---------- 1. Night ---------- */
+body.night {
+  background: linear-gradient(160deg, #02030a 0%, #0a1030 30%, #17204a 60%, #241a3f 85%, #150f2a 100%);
+  color: #7f8ba0;
+  --star-color: #dce6ff;
+  --clock-face: rgba(255,255,255,0.08);
+  --clock-hand: #aab6c8;
+  --clock-accent: #5b7ab8;
+}
+body.night h1, body.night h2, body.night h3 { color: #aab6c8; }
+body.night .gradient-text { background-image: linear-gradient(90deg, #7891c4, #9c95d6, #7891c4); }
+body.night a { color: #6f8fc2; }
+body.night .link-card, body.night .journal-card, body.night .clock-readout-card { background-color: rgba(255,255,255,0.04); }
+body.night #journal-preview { background-color: rgba(255,255,255,0.03); }
+body.night .journal-header { border-bottom-color: rgba(255,255,255,0.1); }
+body.night .week-cell, body.night .stage-cell { background-color: rgba(255,255,255,0.05); color: rgba(127,139,160,0.5); }
+body.night .week-cell.done, body.night .stage-cell.done { background-color: #253654; color: #aab6c8; }
+body.night .week-cell.current, body.night .stage-cell.current { background-color: #3c5578; color: #aab6c8; }
+body.night #quote-line { color: #7f8ba0; }
+body.night .clock-readout-card p { color: #aab6c8; }
+body.night #moon { background-color: #f5f0e0; opacity: 1; filter: blur(0px); box-shadow: 0 0 45px rgba(245,240,224,0.85); }
+
+/* ---------- 2. Astro Dawn ---------- */
+body.astro-dawn {
+  background: linear-gradient(150deg, #060b1c 0%, #142644 30%, #24365f 55%, #3a4a78 75%, #5a5a8a 100%);
+  color: #9aa8c0;
+  --star-color: #cfd9f5;
+  --clock-face: rgba(255,255,255,0.12);
+  --clock-hand: #c3cee0;
+  --clock-accent: #7c93d1;
+}
+body.astro-dawn h1, body.astro-dawn h2, body.astro-dawn h3 { color: #c3cee0; }
+body.astro-dawn .gradient-text { background-image: linear-gradient(90deg, #7c93d1, #a993c4, #7c93d1); }
+body.astro-dawn a { color: #8fb0e0; }
+body.astro-dawn .link-card, body.astro-dawn .journal-card, body.astro-dawn .clock-readout-card { background-color: rgba(255,255,255,0.06); }
+body.astro-dawn #journal-preview { background-color: rgba(255,255,255,0.04); }
+body.astro-dawn .journal-header { border-bottom-color: rgba(255,255,255,0.15); }
+body.astro-dawn .week-cell, body.astro-dawn .stage-cell { background-color: rgba(255,255,255,0.08); color: rgba(154,168,192,0.55); }
+body.astro-dawn .week-cell.done, body.astro-dawn .stage-cell.done { background-color: #3a4f78; color: #c3cee0; }
+body.astro-dawn .week-cell.current, body.astro-dawn .stage-cell.current { background-color: #56709c; color: #c3cee0; }
+body.astro-dawn #quote-line { color: #9aa8c0; }
+body.astro-dawn .clock-readout-card p { color: #c3cee0; }
+body.astro-dawn #moon { background-color: #eef0e6; opacity: 0.9; filter: blur(0.2px); box-shadow: 0 0 35px rgba(245,240,224,0.6); }
+
+/* ---------- 3. Blue Hour ---------- */
+body.blue-hour {
+  background: linear-gradient(150deg, #16234f 0%, #2c3f7c 25%, #5350a0 50%, #8566ad 75%, #a9689c 100%);
+  color: #e2e4f2;
+  --star-color: #e4e0ff;
+  --clock-face: rgba(255,255,255,0.18);
+  --clock-hand: #f3ecff;
+  --clock-accent: #ab8dcb;
+}
+body.blue-hour .gradient-text { background-image: linear-gradient(90deg, #8f89e0, #ab8dcb, #8f89e0); }
+body.blue-hour a { color: #c8c4ff; }
+body.blue-hour .link-card, body.blue-hour .journal-card, body.blue-hour .clock-readout-card { background-color: rgba(255,255,255,0.14); }
+body.blue-hour #journal-preview { background-color: rgba(255,255,255,0.08); }
+body.blue-hour .journal-header { border-bottom-color: rgba(255,255,255,0.22); }
+body.blue-hour .week-cell, body.blue-hour .stage-cell { background-color: rgba(255,255,255,0.12); color: rgba(226,228,242,0.55); }
+body.blue-hour .week-cell.done, body.blue-hour .stage-cell.done { background-color: #5b5f9e; color: #f0f0fa; }
+body.blue-hour .week-cell.current, body.blue-hour .stage-cell.current { background-color: #8b83c4; color: #f0f0fa; }
+body.blue-hour #quote-line { color: #e2e4f2; }
+body.blue-hour #moon { background-color: #e9e6f0; opacity: 0.75; filter: blur(0.4px); box-shadow: 0 0 25px rgba(245,240,224,0.4); }
+body.blue-hour h1, body.blue-hour h2, body.blue-hour h3 {
+  background-image: linear-gradient(90deg, #f3ecff, #e0d3fa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+body.blue-hour .clock-readout-card p { color: #f3ecff; }
+
+/* ---------- 4. Dawn ---------- */
+body.dawn {
+  background: linear-gradient(150deg, #384868 0%, #7d6b8f 25%, #c98f92 50%, #eab08a 75%, #f7d9b0 100%);
+  color: #fffaf5;
+  --star-color: #ffe9d9;
+  --clock-face: rgba(255,255,255,0.2);
+  --clock-hand: #fff3e6;
+  --clock-accent: #e0916f;
+}
+body.dawn .gradient-text { background-image: linear-gradient(90deg, #e0916f, #e6ac7a, #e0916f); }
+body.dawn a { color: #ffe9d6; }
+body.dawn .link-card, body.dawn .journal-card, body.dawn .clock-readout-card { background-color: rgba(255,255,255,0.2); }
+body.dawn #journal-preview { background-color: rgba(255,255,255,0.12); }
+body.dawn .journal-header { border-bottom-color: rgba(255,255,255,0.3); }
+body.dawn .week-cell, body.dawn .stage-cell { background-color: rgba(255,255,255,0.16); color: rgba(255,250,245,0.65); }
+body.dawn .week-cell.done, body.dawn .stage-cell.done { background-color: #8783a6; color: #fffaf5; }
+body.dawn .week-cell.current, body.dawn .stage-cell.current { background-color: #dcab90; color: #fffaf5; }
+body.dawn #quote-line { color: #fffaf5; }
+body.dawn #moon { background-color: #f6ddc9; opacity: 0.45; filter: blur(0.6px); box-shadow: 0 0 15px rgba(245,240,224,0.25); }
+body.dawn h1, body.dawn h2, body.dawn h3 {
+  background-image: linear-gradient(90deg, #fff3e6, #ffe0c9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+body.dawn .clock-readout-card p { color: #fff3e6; }
+
+/* ---------- 5. Day ---------- */
+body.day {
+  background: linear-gradient(160deg, #2e6fae 0%, #4f8fc7 30%, #7fb4dd 55%, #bcdff0 80%, #eef7fa 100%);
+  color: #223344;
+  --star-color: #ffffff;
+  --clock-face: rgba(34,51,68,0.15);
+  --clock-hand: #223344;
+  --clock-accent: #4d7ba8;
+}
+body.day .gradient-text { background-image: linear-gradient(90deg, #3ba3c9, #6bb8d4, #3ba3c9); }
+body.day a { color: #14507a; }
+body.day .link-card, body.day .journal-card, body.day .clock-readout-card { background-color: rgba(255,255,255,0.55); }
+body.day #journal-preview { background-color: rgba(255,255,255,0.5); }
+body.day .journal-header { border-bottom-color: rgba(34,51,68,0.2); }
+body.day .week-cell, body.day .stage-cell { background-color: rgba(255,255,255,0.5); color: rgba(34,51,68,0.55); }
+body.day .week-cell.done, body.day .stage-cell.done { background-color: #6f9bc4; color: white; }
+body.day .week-cell.current, body.day .stage-cell.current { background-color: #4d7ba8; color: white; }
+body.day #quote-line { color: #33526e; }
+body.day #moon { background-color: #ffffff; opacity: 0.1; filter: blur(0.8px); box-shadow: none; }
+body.day h1, body.day h2, body.day h3 {
+  color: #0a3d78;
+}
+body.day .clock-readout-card p { color: #223344; }
+
+/* ---------- 6. Late Afternoon ---------- */
+body.late-afternoon {
+  background: linear-gradient(160deg, #2b3f55 0%, #3f5b74 25%, #6a89a0 50%, #9fb0ad 75%, #c9c0a8 100%);
+  color: #e8eef2;
+  --star-color: #d7e6ff;
+  --clock-face: rgba(255,255,255,0.2);
+  --clock-hand: #f5ede0;
+  --clock-accent: #c9955f;
+}
+body.late-afternoon .gradient-text { background-image: linear-gradient(90deg, #5c8fa3, #7ea3a8, #5c8fa3); }
+body.late-afternoon a { color: #b8d4e8; }
+body.late-afternoon .link-card, body.late-afternoon .journal-card, body.late-afternoon .clock-readout-card { background-color: rgba(255,255,255,0.25); }
+body.late-afternoon #journal-preview { background-color: rgba(255,255,255,0.18); }
+body.late-afternoon .journal-header { border-bottom-color: rgba(255,255,255,0.25); }
+body.late-afternoon .week-cell, body.late-afternoon .stage-cell { background-color: rgba(255,255,255,0.2); color: rgba(232,238,242,0.6); }
+body.late-afternoon .week-cell.done, body.late-afternoon .stage-cell.done { background-color: #4a7196; color: #e8eef2; }
+body.late-afternoon .week-cell.current, body.late-afternoon .stage-cell.current { background-color: #c9955f; color: #2a1f14; }
+body.late-afternoon #quote-line { color: #2a3540; }
+body.late-afternoon #moon { background-color: #f0e6d0; opacity: 0.25; filter: blur(0.6px); box-shadow: 0 0 10px rgba(245,240,224,0.15); }
+body.late-afternoon h1, body.late-afternoon h2, body.late-afternoon h3 {
+  background-image: linear-gradient(90deg, #f5ede0, #e8d9c0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+body.late-afternoon .clock-readout-card p { color: #f5ede0; }
+
+/* ---------- 7. Golden Hour ---------- */
+body.golden-hour {
+  background: linear-gradient(165deg, #22315c 0%, #5c4a80 25%, #a85f78 50%, #d98a68 75%, #f3c184 100%);
+  color: #fdf6f0;
+  --star-color: #ffe3c2;
+  --clock-face: rgba(255,255,255,0.2);
+  --clock-hand: #fff2e0;
+  --clock-accent: #c98a76;
+}
+body.golden-hour .gradient-text { background-image: linear-gradient(90deg, #d97a5c, #c96b7a, #d97a5c); }
+body.golden-hour a { color: #ffd9c2; }
+body.golden-hour .link-card, body.golden-hour .journal-card, body.golden-hour .clock-readout-card { background-color: rgba(255,255,255,0.15); }
+body.golden-hour #journal-preview { background-color: rgba(255,255,255,0.08); }
+body.golden-hour .journal-header { border-bottom-color: rgba(255,255,255,0.25); }
+body.golden-hour .week-cell, body.golden-hour .stage-cell { background-color: rgba(255,255,255,0.12); color: rgba(253,246,240,0.55); }
+body.golden-hour .week-cell.done, body.golden-hour .stage-cell.done { background-color: #8a76a8; color: #fdf6f0; }
+body.golden-hour .week-cell.current, body.golden-hour .stage-cell.current { background-color: #c98a76; color: #fdf6f0; }
+body.golden-hour #quote-line { color: #fdf6f0; }
+body.golden-hour #moon { background-color: #f5c98a; opacity: 0.5; filter: blur(0.5px); box-shadow: 0 0 20px rgba(245,201,138,0.4); }
+body.golden-hour h1, body.golden-hour h2, body.golden-hour h3 {
+  background-image: linear-gradient(90deg, #fff2e0, #ffd9a8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+body.golden-hour .clock-readout-card p { color: #fff2e0; }
+
+/* ---------- 8. Dusk ---------- */
+body.dusk {
+  background: linear-gradient(160deg, #131b36 0%, #2c2650 25%, #4a3564 50%, #6b4368 75%, #402f52 100%);
+  color: #ded8f0;
+  --star-color: #e8d9ff;
+  --clock-face: rgba(255,255,255,0.12);
+  --clock-hand: #ede8fa;
+  --clock-accent: #7a5f8e;
+}
+body.dusk h1, body.dusk h2, body.dusk h3 { color: #ede8fa; }
+body.dusk .gradient-text { background-image: linear-gradient(90deg, #8f6fb8, #a5749c, #8f6fb8); }
+body.dusk a { color: #c9b8e8; }
+body.dusk .link-card, body.dusk .journal-card, body.dusk .clock-readout-card { background-color: rgba(255,255,255,0.1); }
+body.dusk #journal-preview { background-color: rgba(255,255,255,0.06); }
+body.dusk .journal-header { border-bottom-color: rgba(255,255,255,0.18); }
+body.dusk .week-cell, body.dusk .stage-cell { background-color: rgba(255,255,255,0.09); color: rgba(222,216,240,0.5); }
+body.dusk .week-cell.done, body.dusk .stage-cell.done { background-color: #4a3f6e; color: #ede8fa; }
+body.dusk .week-cell.current, body.dusk .stage-cell.current { background-color: #7a5f8e; color: #ede8fa; }
+body.dusk #quote-line { color: #ded8f0; }
+body.dusk #moon { background-color: #e8c9d0; opacity: 0.7; filter: blur(0.3px); box-shadow: 0 0 30px rgba(232,201,208,0.5); }
+body.dusk .clock-readout-card p { color: #ede8fa; }
